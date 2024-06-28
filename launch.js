@@ -27,15 +27,16 @@
         var name    = await getname();
         if(!name)return;
         
-        var {code,stdout,stderr}    = await exec(`docker run -di -p :22 --name ${name} ${image_name}`);
+        var {code}    = await exec(`docker run -di -p :22 --name ${name} ${image_name}`);
         if(code)return console.log('error');
         
         var port    = await getport(name);
         
         console.log(`*** launch : ${name}:${port}`);
         
-        await download('terminal.js');
-        var {code,stdout,stderr}    = await exec(`npx -p ssh2 electron -y terminal.js title=${name} port=${port} username=${username} password=${password}`);
+        await terminal();
+        var npx       = `npx -p ssh2 electron -y terminal.js title=${name} port=${port} username=${username} password=${password}`;
+        var {code}    = await exec(npx);
         if(code)return console.log('error');
 
 })();
@@ -105,11 +106,11 @@ function exec(cmd){
       
 }//exec
 
-async function download(file){
+async function terminal(){
   
       if(fs.existsSync(file))return;
       var token   = '';
-      var owner   = 'javascript-2020',repo='docker',path=file;
+      var owner   = 'javascript-2020',repo='electron',path='terminal/terminal.js';
       var url     = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
       var opts    = {headers:{accept:'application/vnd.github.raw+json'}};
       token && (opts.headers.authorization=`Bearer ${token}`);
