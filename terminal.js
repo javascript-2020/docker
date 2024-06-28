@@ -1,7 +1,6 @@
 //  https://github.com/javascript-2020/stackoverflow/blob/main/term/term.js
 
         console.log('terminal.js');
-        console.log(process.argv);
         
         var username    = arg('username','root'),
             password    = arg('password','node'),
