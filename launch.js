@@ -1,6 +1,9 @@
 
     var image_name    = ['nodejs-min','debian-min','debian'][0];
     
+    cmdline();
+
+    
     var dockerfile    = `https://raw.githubusercontent.com/javascript-2020/docker/main/dockerfile/${image_name}.dockerfile`;
     
     var username      = 'root';
@@ -135,3 +138,13 @@
               if(code)return console.log('error');
               
         }//remove
+        
+        function cmdline(){
+          
+              image_name    = arg('image',image_name);
+              
+              function arg(name,def){return process.argv.reduce((acc,s)=>(s.startsWith(`${name}=`) && s.slice(name.length+1)) || acc,def)}
+              
+        }//cmdline
+          
+        
