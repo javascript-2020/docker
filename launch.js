@@ -42,6 +42,11 @@
         var {code}    = await exec(npx);
         if(code)return console.log('error');
 
+
+        if(remove){
+              remove_container(name);
+        }
+        
         
 })();
 
@@ -123,3 +128,10 @@
               fs.writeFileSync('terminal.js',txt);
               
         }//exists
+
+        async function remove_container(name){
+        
+              var {code,stdout,stderr}   = await exec(`docker rm -f ${name}`);
+              if(code)return console.log('error');
+              
+        }//remove
