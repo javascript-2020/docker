@@ -7,7 +7,7 @@
             password    = arg('password','node'),
             host        = arg('host','127.0.0.1'),
             port        = arg('port',2222),
-            title       = arg('title','termal');
+            title       = arg('title','terminal');
             title       = `${title} - ${username}@${host}:${port}`;
 
         console.log(title);            
