@@ -31,10 +31,10 @@
         if(code)return console.log('error');
         
         var port    = await getport(name);
-        
         console.log(`*** launch : ${name}:${port}`);
+
         
-        await terminal();
+        await load_terminal();
         var npx       = `npx -p ssh2 electron -y terminal.js title=${name} port=${port} username=${username} password=${password}`;
         var {code}    = await exec(npx);
         if(code)return console.log('error');
@@ -106,7 +106,7 @@ function exec(cmd){
       
 }//exec
 
-async function terminal(){
+async function load_terminal(){
   
       if(fs.existsSync(file))return;
       var token   = '';
