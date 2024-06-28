@@ -109,8 +109,9 @@
           
               var resolve,promise=new Promise(res=>resolve=res);
               var args    = cmd.split(' ');
-              var cmd     = 'powershell.exe';
-              var child   = cp.spawn(cmd,args);
+              var cmd     = args.splice(0,1)[0];
+              //var cmd     = 'powershell.exe';
+              var child   = cp.spawn(cmd,args,{shell:true});
               var stdout='',stderr='';
               child.stdout.on('data',data=>(stdout+=data,console.log(data.toString())));
               child.stderr.on('data',data=>(stderr+=data,console.log(data.toString())));
