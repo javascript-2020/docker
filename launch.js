@@ -32,7 +32,7 @@
         console.log(`*** launch : ${name}:${port}`);
         
         await exists('terminal.js');
-        var {code,stdout,stderr}    = await exec(`npx -p ssh2 electron -y terminal.js title=${name} port=${port} username=${username} password=${password}`);
+        var {code,stdout,stderr}    = await exec(`npx -p ssh2 electron -y terminal.js title=${btoa(name)} port=${port} username=${username} password=${password}`);
         if(code)return console.log('error');
 
 })();
