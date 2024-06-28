@@ -10,6 +10,8 @@
             title       = arg('title','terminal');
             title       = `${title} - ${username}@${host}:${port}`;
 
+        function arg(name,def){return process.argv.reduce((acc,s)=>(s.startsWith(`${name}=`) && s.slice(name.length+1)) || acc,def)}
+        
         console.log(title);            
         console.log(username,password,host,port);
         
@@ -24,7 +26,6 @@
               
         });
         
-        function arg(name,def){return process.argv.reduce((acc,s)=>(s.startsWith(`${name}=`) && s.slice(name.length+1)) || acc,def)}
         
         var html    = `
               <title>${title}</title>
