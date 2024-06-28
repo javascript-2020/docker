@@ -2,11 +2,17 @@
     var image       = 'debian-min';
     var username    = 'root';
     var password    = 'debian';
+
+    var owner       = 'javascript-2020';
+    var repo        = 'docker';
+    var branch      = 'main';
+    
+    process.chdir('/work/tmp/test2/');
+    
     
     var fs      = require('fs');
     var cp      = require('child_process');
     
-    process.chdir('/work/tmp/test2/');
 
     
 (async()=>{
@@ -14,8 +20,7 @@
         var {code,stdout,stderr}    = await exec(`docker images ${image} --no-trunc`);
         if(code)return console.log('error');
         if(stdout.indexOf(image)==-1){
-              //await exists(`dockerfile/${image}.dockerfile`);
-              var url     = `https://raw.githubusercontent.com/javascript-2020/docker/main/dockerfile/${image}.dockerfile`;
+              var url   = `https://raw.githubusercontent.com/javascript-2020/docker/main/dockerfile/${image}.dockerfile`;
               var {code,stdout,stderr}    = await exec(`docker build ${url} -t ${image}`);
               if(code)return console.log('error');
         }
@@ -31,7 +36,7 @@
         
         console.log(`*** launch : ${name}:${port}`);
         
-        await exists('terminal.js');
+        await download('terminal.js');
         var {code,stdout,stderr}    = await exec(`npx -p ssh2 electron -y terminal.js title=${name} port=${port} username=${username} password=${password}`);
         if(code)return console.log('error');
 
@@ -102,9 +107,8 @@ function exec(cmd){
       
 }//exec
 
-async function exists(file){
+async function download(file){
   
-      if(fs.existsSync(file))return;
       var token   = '';
       var owner   = 'javascript-2020',repo='docker',path=file;
       var url     = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
