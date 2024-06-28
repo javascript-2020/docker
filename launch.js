@@ -115,6 +115,6 @@ async function load_terminal(){
       var opts    = {headers:{accept:'application/vnd.github.raw+json'}};
       token && (opts.headers.authorization=`Bearer ${token}`);
       var txt     = await fetch(url,opts).then(res=>res.text());
-      fs.writeFileSync(file,txt);
+      fs.writeFileSync('terminal.js',txt);
       
 }//exists
