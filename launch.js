@@ -4,7 +4,7 @@
     var dockerfile    = `https://raw.githubusercontent.com/javascript-2020/docker/main/dockerfile/${image_name}.dockerfile`;
     
     var username      = 'root';
-    var password      = 'debian';
+    var password      = 'node';
 
 
     process.chdir('/work/tmp/test2/');
@@ -19,7 +19,7 @@
         var {code,stdout,stderr}    = await exec(`docker images ${image_name} --no-trunc`);
         if(code)return console.log('error');
         if(stdout.indexOf(image_name)==-1){
-              var {code,stdout,stderr}    = await exec(`docker build ${dockerfile} -t ${image_name}`);
+              var {code,stdout,stderr}    = await exec(`docker build -t ${image_name} ${dockerfile} `);
               if(code)return console.log('error');
         }
 
