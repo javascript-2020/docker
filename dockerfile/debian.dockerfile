@@ -6,7 +6,7 @@ RUN apt -y install --no-install-recommends \
   linux-image-amd64 \
   systemd-sysv
   
-RUN echo "root:debian" | chpasswd
+RUN echo "root:node" | chpasswd
 
 RUN apt -y install openssh-server
 RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
