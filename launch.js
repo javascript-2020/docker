@@ -5,6 +5,8 @@
     
     var username      = 'root';
     var password      = 'node';
+    
+    var remove        = true;
 
 
     process.chdir('/work/tmp/test2/');
@@ -39,6 +41,7 @@
         var {code}    = await exec(npx);
         if(code)return console.log('error');
 
+        
 })();
 
 
