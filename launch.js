@@ -12,7 +12,7 @@
         var {code,stdout,stderr}    = await exec(`docker images ${image} --no-trunc`);
         if(code)return console.log('error');
         if(stdout.indexOf(image)==-1){
-              await exists(`${image}.dockerfile`);
+              await exists(`dockerfile/${image}.dockerfile`);
               var {code,stdout,stderr}    = await exec(`docker build . -f ${image}.dockerfile -t ${image}`);
               if(code)return console.log('error');
         }
