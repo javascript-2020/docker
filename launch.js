@@ -1,5 +1,6 @@
 
-    var image_name    = 'debian';
+    var image_name    = ['nodejs-min','debian-min','debian'][0];
+    
     var dockerfile    = `https://raw.githubusercontent.com/javascript-2020/docker/main/dockerfile/${image_name}.dockerfile`;
     
     var username      = 'root';
@@ -106,6 +107,7 @@ function exec(cmd){
 
 async function download(file){
   
+      if(fs.existsSync(file))return;
       var token   = '';
       var owner   = 'javascript-2020',repo='docker',path=file;
       var url     = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
