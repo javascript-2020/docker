@@ -1,5 +1,5 @@
 
-    var image   = 'nodejs-min';    
+    var image   = 'docker-min';
 
     var fs      = require('fs');
     var cp      = require('child_process');
@@ -27,8 +27,8 @@
         
         console.log(`*** launch : ${name}:${port}`);
         
-        await exists('term.js');
-        var {code,stdout,stderr}    = await exec(`npx -p ssh2 electron -y term.js title=${name} port=${port}`);
+        await exists('terminal.js');
+        var {code,stdout,stderr}    = await exec(`npx -p ssh2 electron -y terminal.js title=${name} port=${port}`);
         if(code)return console.log('error');
 
 })();
@@ -102,7 +102,7 @@ async function exists(file){
   
       if(fs.existsSync(file))return;
       var token   = '';
-      var owner   = 'javascript-2020',repo='stackoverflow',path='term/'+file;
+      var owner   = 'javascript-2020',repo='docker',path=file;
       var url     = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
       var opts    = {headers:{accept:'application/vnd.github.raw+json'}};
       token && (opts.headers.authorization=`Bearer ${token}`);
