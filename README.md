@@ -3,7 +3,7 @@
 ### docker
 
 
-dockerfiles : collection of dockerfiles, https://github.com/javascript-2020/docker/tree/main/dockerfile
+**dockerfiles/**    : collection of dockerfiles, https://github.com/javascript-2020/docker/tree/main/dockerfile
 
 <br>
 
