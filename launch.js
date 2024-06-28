@@ -83,7 +83,7 @@ async function getport(name){
       var {code,stdout,stderr}    = await exec(`docker port ${name}`);
       if(code)return console.log('error');
       var i       = stdout.indexOf(':');
-      var port    = stdout.slice(i+1);
+      var port    = stdout.slice(i+1,-1);
       return port;
       
 }//getport
