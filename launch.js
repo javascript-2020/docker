@@ -17,7 +17,7 @@
 
         var {code,stdout,stderr}    = await exec(`docker images ${image_name} --no-trunc`);
         if(code)return console.log('error');
-        if(stdout.indexOf(image)==-1){
+        if(stdout.indexOf(image_name)==-1){
               var {code,stdout,stderr}    = await exec(`docker build ${dockerfile} -t ${image_name}`);
               if(code)return console.log('error');
         }
