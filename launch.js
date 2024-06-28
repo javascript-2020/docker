@@ -6,7 +6,7 @@
     var username      = 'root';
     var password      = 'node';
     
-    //var remove        = true;
+    var remove        = true;
 
 
     process.chdir('/work/tmp/test2/');
