@@ -45,79 +45,79 @@
 })();
 
 
-async function getname(){
-  
-      do{
-            var name      = get();
-            var result    = await chk(name);
-            if(result===false){
-                  return false;
-            }
-            
-      }while(result!==true);
-      
-      return name;
-            
-            
-      function get(){
+        async function getname(){
+          
+              do{
+                    var name      = get();
+                    var result    = await chk(name);
+                    if(result===false){
+                          return false;
+                    }
+                    
+              }while(result!==true);
+              
+              return name;
+                    
+                    
+              function get(){
+                
+                    var col       = ['red','blue','pink','aqua','gold','gray','lime','navy'];
+                    var flower    = ['rose','lily','iris','fern','dahlia','tulip','pansy','basil','sage','mint'];
+                    var rnd       = arr=>arr[Math.floor(Math.random()*arr.length)];
+                    var name      = `${image_name}---${rnd(col)}-${rnd(flower)}`;
+                    return name;
+                    
+              }//get
         
-            var col       = ['red','blue','pink','aqua','gold','gray','lime','navy'];
-            var flower    = ['rose','lily','iris','fern','dahlia','tulip','pansy','basil','sage','mint'];
-            var rnd       = arr=>arr[Math.floor(Math.random()*arr.length)];
-            var name      = `${image_name}---${rnd(col)}-${rnd(flower)}`;
-            return name;
-            
-      }//get
-
-      async function chk(name){
+              async function chk(name){
+                
+                    var {code,stdout,stderr}    = await exec('docker ps -f name=terminal');
+                    if(code){
+                          console.log('error');
+                          return false;
+                    }
+                    if(stdout.indexOf(name)!=-1){
+                          return 'found';
+                    }
+                    return true;
+                    
+              }//chk
+                    
+        }//getname
         
-            var {code,stdout,stderr}    = await exec('docker ps -f name=terminal');
-            if(code){
-                  console.log('error');
-                  return false;
-            }
-            if(stdout.indexOf(name)!=-1){
-                  return 'found';
-            }
-            return true;
-            
-      }//chk
-            
-}//getname
-
-async function getport(name){
-  
-      var {code,stdout,stderr}    = await exec(`docker port ${name}`);
-      if(code)return console.log('error');
-      var i       = stdout.indexOf(':');
-      var port    = stdout.slice(i+1,-1);
-      return port;
-      
-}//getport
-
-function exec(cmd){
-  
-      var resolve,promise=new Promise(res=>resolve=res);
-      var args    = cmd.split(' ');
-      var cmd     = 'powershell.exe';
-      var child   = cp.spawn(cmd,args);
-      var stdout='',stderr='';
-      child.stdout.on('data',data=>(stdout+=data,console.log(data.toString())));
-      child.stderr.on('data',data=>(stderr+=data,console.log(data.toString())));
-      child.on('exit',code=>(console.log('code:',code),resolve({code,stdout,stderr})));
-      return promise;
-      
-}//exec
-
-async function load_terminal(){
-  
-      if(fs.existsSync('terminal.js'))return;
-      var token   = '';
-      var owner   = 'javascript-2020',repo='electron',path='terminal/terminal.js';
-      var url     = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
-      var opts    = {headers:{accept:'application/vnd.github.raw+json'}};
-      token && (opts.headers.authorization=`Bearer ${token}`);
-      var txt     = await fetch(url,opts).then(res=>res.text());
-      fs.writeFileSync('terminal.js',txt);
-      
-}//exists
+        async function getport(name){
+          
+              var {code,stdout,stderr}    = await exec(`docker port ${name}`);
+              if(code)return console.log('error');
+              var i       = stdout.indexOf(':');
+              var port    = stdout.slice(i+1,-1);
+              return port;
+              
+        }//getport
+        
+        function exec(cmd){
+          
+              var resolve,promise=new Promise(res=>resolve=res);
+              var args    = cmd.split(' ');
+              var cmd     = 'powershell.exe';
+              var child   = cp.spawn(cmd,args);
+              var stdout='',stderr='';
+              child.stdout.on('data',data=>(stdout+=data,console.log(data.toString())));
+              child.stderr.on('data',data=>(stderr+=data,console.log(data.toString())));
+              child.on('exit',code=>(console.log('code:',code),resolve({code,stdout,stderr})));
+              return promise;
+              
+        }//exec
+        
+        async function load_terminal(){
+          
+              if(fs.existsSync('terminal.js'))return;
+              var token   = '';
+              var owner   = 'javascript-2020',repo='electron',path='terminal/terminal.js';
+              var url     = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+              var opts    = {headers:{accept:'application/vnd.github.raw+json'}};
+              token && (opts.headers.authorization=`Bearer ${token}`);
+              var txt     = await fetch(url,opts).then(res=>res.text());
+              fs.writeFileSync('terminal.js',txt);
+              
+        }//exists
