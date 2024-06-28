@@ -1,7 +1,5 @@
 FROM amd64/debian:bullseye
-  
-LABEL com.iximiuz-project="docker-to-linux
-  
+    
 RUN apt -y update
   
 RUN apt -y install --no-install-recommends \
