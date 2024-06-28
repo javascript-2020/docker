@@ -1,6 +1,6 @@
 FROM amd64/debian:bullseye
   
-LABEL com.iximiuz-project="docker-to-linux"
+LABEL com.iximiuz-project="docker-to-linux
   
 RUN apt -y update
   
