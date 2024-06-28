@@ -1,10 +1,10 @@
 
-    var image   = 'docker-min';
+    var image   = 'debian-min';
 
     var fs      = require('fs');
     var cp      = require('child_process');
     
-    //process.chdir('/work/tmp/test2/');
+    process.chdir('/work/tmp/test2/');
 
     
 (async()=>{
@@ -16,6 +16,7 @@
               var {code,stdout,stderr}    = await exec(`docker build . -f ${image}.dockerfile -t ${image}`);
               if(code)return console.log('error');
         }
+
 
         var name    = await getname();
         if(!name)return;
