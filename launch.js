@@ -1,27 +1,24 @@
 
-    var image       = 'debian-min';
-    var username    = 'root';
-    var password    = 'debian';
-
-    var owner       = 'javascript-2020';
-    var repo        = 'docker';
-    var branch      = 'main';
+    var image_name    = 'debian';
+    var dockerfile    = `https://raw.githubusercontent.com/javascript-2020/docker/main/dockerfile/${image_name}.dockerfile`;
     
+    var username      = 'root';
+    var password      = 'debian';
+
+
     process.chdir('/work/tmp/test2/');
     
     
     var fs      = require('fs');
     var cp      = require('child_process');
-    
 
     
 (async()=>{
 
-        var {code,stdout,stderr}    = await exec(`docker images ${image} --no-trunc`);
+        var {code,stdout,stderr}    = await exec(`docker images ${image_name} --no-trunc`);
         if(code)return console.log('error');
         if(stdout.indexOf(image)==-1){
-              var url   = `https://raw.githubusercontent.com/javascript-2020/docker/main/dockerfile/${image}.dockerfile`;
-              var {code,stdout,stderr}    = await exec(`docker build ${url} -t ${image}`);
+              var {code,stdout,stderr}    = await exec(`docker build ${dockerfile} -t ${image_name}`);
               if(code)return console.log('error');
         }
 
@@ -29,7 +26,7 @@
         var name    = await getname();
         if(!name)return;
         
-        var {code,stdout,stderr}    = await exec(`docker run -di -p :22 --name ${name} ${image}`);
+        var {code,stdout,stderr}    = await exec(`docker run -di -p :22 --name ${name} ${image_name}`);
         if(code)return console.log('error');
         
         var port    = await getport(name);
@@ -62,7 +59,7 @@ async function getname(){
             var col       = ['red','blue','pink','aqua','gold','gray','lime','navy'];
             var flower    = ['rose','lily','iris','fern','dahlia','tulip','pansy','basil','sage','mint'];
             var rnd       = arr=>arr[Math.floor(Math.random()*arr.length)];
-            var name      = `${image}---${rnd(col)}-${rnd(flower)}`;
+            var name      = `${image_name}---${rnd(col)}-${rnd(flower)}`;
             return name;
             
       }//get
