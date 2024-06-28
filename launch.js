@@ -108,7 +108,7 @@ function exec(cmd){
 
 async function load_terminal(){
   
-      if(fs.existsSync(file))return;
+      if(fs.existsSync('terminal.js'))return;
       var token   = '';
       var owner   = 'javascript-2020',repo='electron',path='terminal/terminal.js';
       var url     = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
