@@ -1,0 +1,51 @@
+{
+  "download-dir": "/vol/downloads",
+  "incomplete-dir": "/vol/downloads/.incomplete",
+  "incomplete-dir-enabled": true,
+  "watch-dir": "/vol/watchdir",
+  "watch-dir-enabled": true,
+
+  "rpc-enabled": true,
+  "rpc-bind-address": "0.0.0.0",
+  "rpc-port": 9091,
+  "rpc-username": "transmission",
+  "rpc-password": "transmission",
+  "rpc-authentication-required": true,
+  "rpc-whitelist-enabled": false,
+
+  "peer-port": 51413,
+  "peer-port-random-on-start": false,
+  "port-forwarding-enabled": true,
+
+  "dht-enabled": true,
+  "pex-enabled": true,
+  "lpd-enabled": false,
+
+  "encryption": 2,
+
+  "blocklist-enabled": true,
+  "blocklist-url": "https://github.com/Naunter/BT_BlockLists/raw/master/bt_blocklists.gz",
+  "blocklist-update-enabled": true,
+
+  "ratio-limit-enabled": false,
+  "idle-seeding-limit-enabled": false,
+
+  "download-queue-enabled": true,
+  "download-queue-size": 5,
+  "seed-queue-enabled": true,
+  "seed-queue-size": 5,
+
+  "script-torrent-done-enabled": false,
+
+  "trash-original-torrent-files": true,
+  "rename-partial-files": true,
+
+  "umask": 2,
+  "peer-limit-global": 200,
+  "peer-limit-per-torrent": 50,
+
+  "speed-limit-up-enabled": false,
+  "speed-limit-down-enabled": false,
+
+  "alt-speed-enabled": false
+}
